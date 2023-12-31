@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotto Number Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lotto Number Generator</h1>
+
+  <!-- ... previous HTML code ... -->
+
+<button onclick="generateAndDisplayNumbers()">Generate Lotto Numbers</button>
+
+<p id="lottoNumbers"></p>
+
+<script>
+    function generateLottoNumbers(numOfNumbers, minRange, maxRange) {
+        if (maxRange - minRange + 1 < numOfNumbers) {
+            console.log("Invalid range for the given number of lotto numbers.");
+            return null;
+        }
+
+        const lottoNumbers = [];
+        while (lottoNumbers.length < numOfNumbers) {
+            const randomNum = Math.floor(Math.random() * (maxRange - minRange + 1) + minRange);
+            if (!lottoNumbers.includes(randomNum)) {
+                lottoNumbers.push(randomNum);
+            }
+        }
+
+        return lottoNumbers.sort((a, b) => a - b);
+    }
+
+    function generateAndDisplayNumbers() {
+        const result = generateLottoNumbers(6, 1, 49);
+        const lottoNumbersElement = document.getElementById("lottoNumbers");
+
+        if (result !== null) {
+            // Use innerHTML instead of textContent to render HTML content
+            lottoNumbersElement.innerHTML = "<strong>Lotto Numbers:</strong> " + result.join(", ");
+        } else {
+            lottoNumbersElement.textContent = "Error generating Lotto numbers.";
+        }
+    }
+</script>
+
+<!-- ... remaining HTML code ... -->
